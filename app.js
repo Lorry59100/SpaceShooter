@@ -169,7 +169,7 @@ function resetPlayer() {
     if(gameManager.player == undefined) {
         let asset = gameManager.assets['ship1'];
         
-        gameManager.player = new Sprite(gameSettings.playerDivName,
+        gameManager.player = new Player(gameSettings.playerDivName,
         new Point(gameSettings.playerStart.x, gameSettings.playerStart.y),
         asset.fileName,
         new Size(asset.width, asset.height)

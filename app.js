@@ -20,7 +20,15 @@ const gameSettings = {
     playerStart : {
         x :880,
         y :700,
+    },
+
+    playerstartLives : 3,
+    playerState: {
+        ok: 0,
+        dead: 1,
+        hitFlashing: 2
     }
+
 };
 
 

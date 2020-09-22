@@ -12,7 +12,7 @@ const gameSettings = {
         down : 40,
         space : 32
     },
-    targetFPS: 1000 / 60,
+    targetFPS: 1000 / 10,
     playareaWidth: 1000,
     playareaHeight: 800,
     playareaDiv: '#playarea',

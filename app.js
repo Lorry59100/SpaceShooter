@@ -171,8 +171,7 @@ function resetPlayer() {
         
         gameManager.player = new Player(gameSettings.playerDivName,
         new Point(gameSettings.playerStart.x, gameSettings.playerStart.y),
-        asset.fileName,
-        new Size(asset.width, asset.height)
+        asset
         );
         gameManager.player.addToBoard(true);
     }

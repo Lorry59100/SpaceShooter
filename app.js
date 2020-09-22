@@ -187,6 +187,14 @@ let gameManager = {
             let xStep = gameSettings.playerMoveStep * x;
             let yStep = gameSettings.playerMoveStep * y;
 
+            if(this.boundaryRect.outsideHorizontal(xStep + this.position.x) == true) {
+                xStep = 0;
+            }
+
+            if(this.boundaryRect.outsideHorizontal(yStep + this.position.y) == true) {
+                yStep = 0;
+            }
+
             this.incrementPosition(xStep, yStep);
         }
 

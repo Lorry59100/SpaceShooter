@@ -162,13 +162,15 @@ let gameManager = {
     /* EXTENSIONS DE CLASSE */
 
     class Player extends Sprite {
-        constructor(divName, position, assetDesc) {
+        constructor(divName, position, assetDesc, boundaryRect) {
             super(divName, position, assetDesc.fileName,
                 new Size(assetDesc.width, assetDesc.height));
                 this.lives = gameSettings.playerstartLives;
                 this.score = 0;
                 this.highScore = 0;
                 this.state = gameSettings.playerState.ok;
+                this.boundaryRect = boundaryRect;
+                this.boundaryRect.shift(this.anchorShift.x, this.anchorShift.y);
         }
 
         reset() {

@@ -158,7 +158,7 @@ let gameManager = {
             if(this.score > this.highScore) {
                 this.highScore = this.score;
             }
-            $('#highscore').text(this.highscore);
+            $('#highScore').text(this.highScore);
         }
 
     }

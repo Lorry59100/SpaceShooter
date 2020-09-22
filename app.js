@@ -145,6 +145,13 @@ let gameManager = {
             this.setPosition(gameManager.playerStart.x, gameManager.playerStart.y, true);
         }
 
+        move(x, y) {
+            let xStep = gameSettings.playerMoveStep * x;
+            let yStep = gameSettings.playerMoveStep * y;
+
+            this.incrementPosition(xStep, yStep);
+        }
+
         incrementScore(amount) {
             this.score += amount;
             this.setScore();

@@ -176,6 +176,7 @@ function resetPlayer() {
         gameManager.player.addToBoard(true);
     }
     console.log('resetPlayer() gameManager.player:', gameManager.player);
+    gameManager.player.reset()
 }
 
 function init() {

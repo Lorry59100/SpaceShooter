@@ -35,7 +35,10 @@ const gameSettings = {
 
 let gameManager = {
     assets:{},
-    player: undefined
+    player: undefined,
+    lastUpdated: Date.now(),
+    elapsedTime: 0,
+    fps: 0,
 }
 
 /***  CLASSES SIZE POINT & SPRITE ***/

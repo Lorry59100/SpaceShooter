@@ -197,6 +197,7 @@ function resetPlayer() {
 function init() {
     console.log('Main Game init()');
     resetPlayer();
+    setTimeout(tick, gameSettings.targetFPS);
 }
 
 function processAsset(indexNum) {

@@ -169,6 +169,17 @@ let gameManager = {
 
 
 /* FONCTIONS */
+function tick() {
+    let now = Date.now();
+    let dt = now - gameManager.lastUpdated;
+    gameManager.lastUpdated = now;
+    gameManager.fps = parseInt(1000 / dt);
+
+    $('#divFPS').text('FPS: ' + gameManager.fps);
+
+    setTimeout(tick, gameSettings.targetFPS);
+}
+
 function resetPlayer() {
     if(gameManager.player == undefined) {
         let asset = gameManager.assets['ship1'];

@@ -237,19 +237,18 @@ $(function(){
 
             switch(e.which) {
                 case gameSettings.keyPress.up :
-                    console.log('up');
+                    gameManager.player.move(0, -1);
                     break
                 case gameSettings.keyPress.down :
-                    console.log('down');
+                    gameManager.player.move(0, 1);
                     break
                 case gameSettings.keyPress.left :
-                    console.log('left');
+                    gameManager.player.move(-1, 0);;
                     break
                 case gameSettings.keyPress.right :
-                    console.log('right');
+                    gameManager.player.move(1, 0);
                     break
                 case gameSettings.keyPress.space :
-                    console.log('space');
                     break
             }
 

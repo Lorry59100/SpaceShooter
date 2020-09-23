@@ -323,7 +323,7 @@ function resetPlayer() {
     gameManager.player.reset()
 }
 
-function init() {
+function resetGame() {
     console.log('Main Game init()');
     resetPlayer();
     setTimeout(tick, gameSettings.targetFPS);

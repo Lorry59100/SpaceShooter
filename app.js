@@ -12,7 +12,7 @@ const gameSettings = {
         down : 40,
         space : 32
     },
-    targetFPS: 1000 / 10,
+    targetFPS: 1000 / 60,
     playareaWidth: 720,
     playareaHeight: 720,
     playareaDiv: '#playarea',
@@ -180,7 +180,7 @@ let gameManager = {
             this.setLives();
             this.setScore();
             this.setHighScore();
-            this.setPosition(gameManager.playerStart.x, gameManager.playerStart.y, true);
+            this.setPosition(gameSettings.playerStart.x, gameSettings.playerStart.y, true);
         }
 
         move(x, y) {
@@ -232,6 +232,7 @@ function tick() {
     $('#divFPS').text('FPS: ' + gameManager.fps);
 
     setTimeout(tick, gameSettings.targetFPS);
+    console.log(gameSettings)
 }
 
 function resetPlayer() {

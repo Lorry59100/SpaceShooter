@@ -1,6 +1,7 @@
 /* CONTENEUR D'IMGS */
 const imageFiles = [
-    'ship1'
+    'ship1',
+    'beam'
 ];
 
 /* CONTROLES ET POSITION DE DEPART */
@@ -32,7 +33,7 @@ const gameSettings = {
     playerState: {
         ok: 0,
         dead: 1,
-        hitFlashing: 2
+        hitFlashing: 3
     },
     playerMoveStep : 8
 
@@ -174,7 +175,7 @@ let gameManager = {
         }
 
         reset() {
-            for(let i = 0; i < this.listBullets.length; i++) {
+            for(let i = 0; i < this.listBullets.length; ++i) {
                 this.listBullets[i].removeFromBoard();
             }
             this.listBullets = [];
@@ -183,8 +184,8 @@ let gameManager = {
         }
 
         update(dt) {
-            for(let i = this.listBullets.length - 1; i >=0 ;i--) {
-                if(this.listBullets[i].dead ==true ) {
+            for(let i = this.listBullets.length - 1; i >=0 ; --i) {
+                if(this.listBullets[i].dead == true ) {
                     this.listBullets.splice(i, 1);
                 } else {
                     this.listBullets[i].update(dt);
@@ -203,6 +204,7 @@ let gameManager = {
                             this.player.position.y)
                         )
                     );
+                    this.total_bullets++;
                 }
         }
 
@@ -220,6 +222,7 @@ let gameManager = {
                 this.state = gameSettings.playerState.ok;
                 this.boundaryRect = boundaryRect;
                 this.boundaryRect.shift(this.anchorShift.x, this.anchorShift.y);
+                /* console.log(assetDesc) */
         }
 
         reset() {
@@ -272,12 +275,12 @@ let gameManager = {
 
     class Bullet extends Sprite {
 
-        constructor(divName, assetDesc, position) {
-            super(divName, position, assetDesc.fileName, new Size(assetDesc.width, assetDesc.height));
-            this.life =gameSettings.bulletLife; //ms
-            this.dead = false;
-            this.addToBoard(true);
-        }
+       constructor(divName, assetDesc, position) {
+        super(divName, position, assetDesc.fileName, new Size(assetDesc.width, assetDesc.height));
+        this.life = gameSettings.bulletLife;
+        this.dead = false;
+        this.addToBoard(true);
+    }
 
         update(dt) {
             let inc = dt * gameSettings.bulletSpeed;
@@ -307,7 +310,6 @@ function tick() {
     gameManager.bullets.update(dt);
 
     setTimeout(tick, gameSettings.targetFPS);
-    console.log(gameSettings)
 }
 
 function resetBullets() {

@@ -13,14 +13,14 @@ const gameSettings = {
         space : 32
     },
     targetFPS: 1000 / 10,
-    playareaWidth: 1000,
-    playareaHeight: 800,
+    playareaWidth: 720,
+    playareaHeight: 720,
     playareaDiv: '#playarea',
 
     playerDivName : 'playersprite',
     playerStart : {
-        x :880,
-        y :700,
+        x :360,
+        y :440,
     },
 
     playerstartLives : 3,
@@ -77,7 +77,7 @@ let gameManager = {
             this.divName = divName;
             this.imgName = imgName;
             this.size = sizePx;
-            this.anchorShift = new Point(-this.size.width * 4.5, -this.size.height / 2);
+            this.anchorShift = new Point(-this.size.width / 2 , -this.size.height / 2);
         }
 
         addToBoard(shift) {
@@ -240,7 +240,8 @@ function resetPlayer() {
         
         gameManager.player = new Player(gameSettings.playerDivName,
         new Point(gameSettings.playerStart.x, gameSettings.playerStart.y),
-        asset
+        asset,
+        new Rect(40,40, gameSettings.playareaWidth - 80, gameSettings.playareaHeight - 80)
         );
         gameManager.player.addToBoard(true);
     }

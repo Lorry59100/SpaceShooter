@@ -12,8 +12,8 @@ body {
 
 #playarea {
     position: relative;
-    width: 1000px;
-    height: 800px;
+    width: 720px;
+    height: 720px;
     border: solid green 2px;
     overflow: hidden;
 }

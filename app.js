@@ -36,40 +36,10 @@ const gameSettings = {
         hitFlashing: 3
     },
     playerMoveStep : 8,
-    enemyState : {
-        ready : 1,
-        dead : 0,
-        movingToWayPoint : 2,
-    }
+    
 };
 
-const wayPoints = {
-    leftToRight: [
-    {
-        rotation: 0,
-        x: 60,
-        y: -90,
-        dir_x: 0,
-        dir_y: 0,
-    },
-    
-    {
-        rotation: 0,
-        x: 60,
-        y: 128,
-        dir_x: 0,
-        dir_y: 1,
-    },
-    
-    {
-        rotation: 0,
-        x: 810,
-        y: 128,
-        dir_x: 1,
-        dir_y: 0,
-    }
-]
-}
+
 
 
 let gameManager = {
@@ -109,13 +79,7 @@ let gameManager = {
         }
     }
 
-    class WayPoint {
-        constructor(x, y, dir_x, dir_y) {
-            this.point = new Point(x, y);
-            this.dir_x = dir_x;
-            this.dir_y = dir_y;
-        }
-    }
+    
 
     /* SPRITE */
     class Sprite {

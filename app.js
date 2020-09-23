@@ -13,6 +13,11 @@ const gameSettings = {
         space : 32
     },
     targetFPS: 1000 / 60,
+
+    bulletSpeed : 700 / 1000,
+    bulletLife : 4000,
+    bulletFireRate : 2000,
+
     playareaWidth: 720,
     playareaHeight: 720,
     playareaDiv: '#playarea',
@@ -37,6 +42,7 @@ const gameSettings = {
 let gameManager = {
     assets:{},
     player: undefined,
+    bullets: undefined,
     lastUpdated: Date.now(),
     elapsedTime: 0,
     fps: 0,

@@ -36,6 +36,11 @@ const gameSettings = {
         hitFlashing: 3
     },
     playerMoveStep : 8,
+    enemyState : {
+        ready : 1,
+        dead : 0,
+        movingToWayPoint : 2,
+    }
 };
 
 const wayPoints = {

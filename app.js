@@ -308,6 +308,14 @@ function tick() {
     console.log(gameSettings)
 }
 
+function resetBullets() {
+    if(gameManager.bullets != undefined) {
+        gameManager.bullets.reset();
+    } else {
+        gameManager.bullets = new BulletCollection(gameManager.player);
+    }
+}
+
 function resetPlayer() {
     if(gameManager.player == undefined) {
         let asset = gameManager.assets['ship1'];

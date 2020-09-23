@@ -344,7 +344,7 @@ function processAsset(indexNum) {
             processAsset(indexNum);
         } else {
             console.log('Assets Done:', gameManager.assets);
-            init();
+            resetGame();
         }
     }
 }

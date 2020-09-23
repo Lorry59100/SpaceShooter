@@ -304,6 +304,8 @@ function tick() {
 
     $('#divFPS').text('FPS: ' + gameManager.fps);
 
+    gameManager.bullets.update(dt);
+
     setTimeout(tick, gameSettings.targetFPS);
     console.log(gameSettings)
 }

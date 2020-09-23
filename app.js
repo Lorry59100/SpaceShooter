@@ -236,6 +236,15 @@ let gameManager = {
             this.addToBoard(true);
         }
 
+        update(dt) {
+            let inc = dt * gameSettings.bulletSpeed;
+            this.incrementPosition(0, -inc);
+            this.life -= dt;
+            if (this.life < 0) {
+                this.killMe();
+            }
+        }
+
     }
 
 

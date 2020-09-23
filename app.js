@@ -232,8 +232,8 @@ let gameManager = {
         constructor(divName, assetDesc, position) {
             super(divName, position, assetDesc.fileName, new Size(assetDesc.width, assetDesc.height));
             this.life =gameSettings.bulletLife; //ms
-            this.addToBoard(true);
             this.dead = false;
+            this.addToBoard(true);
         }
 
     }

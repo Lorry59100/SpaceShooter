@@ -245,6 +245,11 @@ let gameManager = {
             }
         }
 
+        killMe() {
+            this.dead = true;
+            this.removeFromBoard();
+        }
+
     }
 
 

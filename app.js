@@ -288,6 +288,25 @@ let gameManager = {
             }
         }
 
+        moveTowardPoint(dt) {
+            let inc = dt * this.speed;
+            this.incrementPosition(inc * this.targetWayPoint.dir_x * this.targetWayPoint.dir_y);
+
+            if(Math.abs(this.position.x - this.targetWayPoint.x) < Math.abs(inc) &&
+            Math.abs(this.position.y - this.targetWayPoint.y) < Math.abs(inc)) {
+                this.updatePosition(this.targetWayPoint.x, this.targetWayPoint.y);
+            }
+
+            if(this.position.equalToPoint(this.targetWayPoint.point.x, this.targetWayPoint.point.y) == true) {
+                if (this.targetWayPointNumber == this.lastWayPointIndex) {
+                    this.killMe();
+                    console.log('reached end');
+                } else {
+                    this.setNextWayPoint();
+                }
+            }
+        }
+
         setMoving() {
             this.targetWayPointNumber = 0;
             this.targetWayPoint = this.waypointList[this.targetWayPointNumber];

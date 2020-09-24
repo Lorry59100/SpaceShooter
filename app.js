@@ -294,7 +294,7 @@ let gameManager = {
             this.lastWayPointIndex = this.waypointList.length -1;
             this.setPosition(this.targetWayPoint.point.x, this.targetWayPoint.point.y, false);
             this.addToBoard(false);
-            this.targetWayPointNumber -1;
+            this.targetWayPointNumber = 1;
             this.targetWayPoint = this.waypointList[this.targetWayPointNumber];
             this.state = gameSettings.enemyState.movingToWayPoint;
         }

@@ -1,7 +1,8 @@
 /* CONTENEUR D'IMGS */
 const imageFiles = [
     'ship1',
-    'beam'
+    'beam',
+    'alienship'
 ];
 
 /* CONTROLES ET POSITION DE DEPART */

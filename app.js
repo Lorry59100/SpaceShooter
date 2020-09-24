@@ -66,7 +66,7 @@ const wayPoints = {
         {
         rotation : 0,
         x : 180,
-        y : 620,
+        y : 200,
         dir_x : 0,
         dir_y : 0
         },
@@ -371,11 +371,11 @@ let gameManager = {
 
         moveTowardPoint(dt) {
             let inc = dt * this.speed;
-            this.incrementPosition(inc * this.targetWayPoint.dir_x * this.targetWayPoint.dir_y);
+            this.incrementPosition(inc * this.targetWayPoint.dir_x, inc * this.targetWayPoint.dir_y);
 
-            if(Math.abs(this.position.x - this.targetWayPoint.x) < Math.abs(inc) &&
-            Math.abs(this.position.y - this.targetWayPoint.y) < Math.abs(inc)) {
-                this.updatePosition(this.targetWayPoint.x, this.targetWayPoint.y);
+            if(Math.abs(this.position.x - this.targetWayPoint.point.x) < Math.abs(inc) &&
+            Math.abs(this.position.y - this.targetWayPoint.point.y) < Math.abs(inc)) {
+                this.updatePosition(this.targetWayPoint.point.x, this.targetWayPoint.point.y);
             }
 
             if(this.position.equalToPoint(this.targetWayPoint.point.x, this.targetWayPoint.point.y) == true) {

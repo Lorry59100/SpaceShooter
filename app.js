@@ -542,6 +542,10 @@ function resetBullets() {
     }
 }
 
+function resetEnemies() {
+    gameManager.enemies = new EnemyCollection(gameManager.player);
+}
+
 function resetPlayer() {
     if(gameManager.player == undefined) {
         let asset = gameManager.assets['ship1'];

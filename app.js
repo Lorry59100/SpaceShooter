@@ -565,6 +565,7 @@ function resetGame() {
     console.log('Main Game init()');
     resetPlayer();
     resetBullets();
+    resetEnemies();
     setTimeout(tick, gameSettings.targetFPS);
 }
 

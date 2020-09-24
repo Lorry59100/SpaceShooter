@@ -40,8 +40,40 @@ const gameSettings = {
     
 };
 
-
-
+const wayPoints = {
+    leftToRightShallow : [
+        {
+        rotation : 0,
+        x : 60,
+        y : -90,
+        dir_x : 0,
+        dir_y : 0
+        },
+        {
+        rotation : 0,
+        x : 60,
+        y : 128,
+        dir_x : 0,
+        dir_y : 1
+        }
+],
+    streamFrom180 : [
+        {
+        rotation : 0,
+        x : 180,
+        y : 620,
+        dir_x : 0,
+        dir_y : 0
+        },
+        {
+        rotation : 0,
+        x : 180,
+        y : -90,
+        dir_x : 0,
+        dir_y : -1
+        }
+]
+};
 
 let gameManager = {
     assets:{},

@@ -273,6 +273,21 @@ let gameManager = {
             this.speed = sequence.speed;
             this.readInWayPoints(sequence.wayPoints);
         }
+
+        readInWayPoints(wpList) {
+            this.waypointList = [];
+            for(let i = 0; i < wpList.length; i++) {
+                let t_wp = wpList[i];
+                let n_wp = new WayPoint(
+                    t_wp.x + this.anchorShift.x,
+                    t_wp.y + this.anchorShift.y,
+                    t_wp.dir_x,
+                    t_wp.dir_y
+                );
+                this.waypointList.push(n_wp);
+            }
+        }
+
     }
 
 

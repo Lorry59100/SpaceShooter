@@ -431,6 +431,7 @@ function processAsset(indexNum) {
 /* DETECTION DES TOUCHES */
 $(function(){
     processAsset(0);
+    setUpSequences();
     $(document).keydown(
 
         function(e){

@@ -288,6 +288,14 @@ let gameManager = {
             }
         }
 
+        update(dt) {
+            switch(this.state) {
+                case gameSettings.enemyState.movingToWayPoint:
+                    this.moveTowardPoint(dt);
+                    break;
+            }
+        }
+
         moveTowardPoint(dt) {
             let inc = dt * this.speed;
             this.incrementPosition(inc * this.targetWayPoint.dir_x * this.targetWayPoint.dir_y);

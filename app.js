@@ -338,7 +338,7 @@ let gameManager = {
     }
 
 /* FONCTIONS */
-function addEnemySequence(delayBefore, image, score, live, speed, number, delayBetween, wayPoints) {
+function addEnemySequence(delayBefore, image, score, lives, speed, number, delayBetween, wayPoints) {
 
     for(let i = 0; i < number; i++) {
         let delay = delayBetween;
@@ -357,6 +357,7 @@ function addEnemySequence(delayBefore, image, score, live, speed, number, delayB
     }
 
 }
+
 
 function tick() {
     let now = Date.now();

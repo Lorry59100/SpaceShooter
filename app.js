@@ -312,6 +312,11 @@ let gameManager = {
             this.targetWayPoint = this.waypointList[this.targetWayPointNumber];
         }
 
+        killMe() {
+            this.state = gameSettings.enemyState.dead;
+            this.removeFromBoard();
+        }
+
         setMoving() {
             this.targetWayPointNumber = 0;
             this.targetWayPoint = this.waypointList[this.targetWayPointNumber];

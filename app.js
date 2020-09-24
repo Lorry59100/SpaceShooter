@@ -117,6 +117,15 @@ let gameManager = {
     
 
     /* SPRITE */
+    class WayPoint {
+        constructor(x,y,dir_x,dir_y) {
+            this.point = new Point(x,y);
+            this.dir_x = dir_x;
+            this.dir_y = dir_y;
+        }
+    }
+    
+    
     class Sprite {
         constructor(divName, position, imgName, sizePx) {
             this.position = position;

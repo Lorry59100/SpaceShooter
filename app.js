@@ -124,6 +124,67 @@ let gameManager = {
     
 
     /* SPRITE */
+    class EnemyCollection {
+        constructor(player) {
+            this.listEnemies = [];
+            this.lastAdded = 0;
+            this.gameOver = false;
+            this.sequenceIndex = 0;
+            this.sequencesDone = false;
+            this.count = 0;
+            this.player = player;
+        }
+
+        killAll() {
+            for(let i = 0; i < this.listEnemies.length; i++) {
+                this.listEnemies[i].killMe();
+            }
+        }
+
+        update(dt) {
+            this.lastAdded += dt;
+            if (this.sequencesDone == false &&
+                enemySequences[this.sequenceIndex].delayBefore < this.lastAdded) {
+                    this.addEnemy();
+                }
+
+            for (let i = this.listEnemies.length - 1; i >= 0; --i) {
+                if(this.listEnemies[i].state == gameSettings.enemyState.dead) {
+                    this.listEnemies.splice(i, 1);
+                } else {
+                    this.listEnemies[i].update(dt);
+                }
+            }
+
+                this.checkGameOver();
+
+        }
+
+        checkGameOver() {
+            if(this.listEnemies.length == 0 && this.sequencesDone == true) {
+                this.gameOver = true;
+                console.log('GAME OVER')
+            }
+        }
+
+        addEnemy() {
+            let seq = enemySequences[this.sequenceIndex];
+            let en_new = new Enemy('en_' + this.count, gameManager.assets[seq.image],
+            this.player, seq);
+            this.listEnemies.push(en_new);
+            en_new.setMoving();
+            this.count++;
+            this.sequenceIndex++;
+            this.lastAdded = 0;
+            if (this.sequenceIndex == enemySequences.length) {
+                this.sequencesDone = true;
+                console.log('sequences done');
+            }
+        }
+
+    }
+    
+    
     class WayPoint {
         constructor(x,y,dir_x,dir_y) {
             this.point = new Point(x,y);

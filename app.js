@@ -307,6 +307,11 @@ let gameManager = {
             }
         }
 
+        setNextWayPoint() {
+            this.targetWayPointNumber++;
+            this.targetWayPoint = this.waypointList[this.targetWayPointNumber];
+        }
+
         setMoving() {
             this.targetWayPointNumber = 0;
             this.targetWayPoint = this.waypointList[this.targetWayPointNumber];

@@ -259,6 +259,22 @@ let gameManager = {
     }
 
     /* EXTENSIONS DE CLASSE */
+    class Enemy extends Sprite {
+        constructor(divName, assetDesc, player, sequence) {
+            super(divName, new Point(0,0), assetDesc.fileName, new Size(assetDesc.width, assetDesc.height));
+            this.state = gameSettings.enemyState.ready;
+            this.waypointList = [];
+            this.targetWayPointNumber = 0;
+            this.targetWayPoint = new WayPoint(0,0,0,0);
+            this.lastWayPointIndex = 0;
+            this.player = player;
+            this.score = sequence.score;
+            this.lives = sequence.lives;
+            this.speed = sequence.speed;
+            this.readInWayPoints(sequence.wayPoints);
+        }
+    }
+
 
     class Player extends Sprite {
         constructor(divName, position, assetDesc, boundaryRect) {

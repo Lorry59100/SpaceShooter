@@ -338,6 +338,26 @@ let gameManager = {
     }
 
 /* FONCTIONS */
+function addEnemySequence(delayBefore, image, score, live, speed, number, delayBetween, wayPoints) {
+
+    for(let i = 0; i < number; i++) {
+        let delay = delayBetween;
+        if(i == 0) {
+            delay = delayBefore;
+        }
+
+        enemySequences.push({
+            delayBefore : delay,
+            image : image,
+            wayPoints : wayPoints,
+            score : score,
+            lives :lives,
+            speed : speed
+        });
+    }
+
+}
+
 function tick() {
     let now = Date.now();
     let dt = now - gameManager.lastUpdated;

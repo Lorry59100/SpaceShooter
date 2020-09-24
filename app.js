@@ -358,6 +358,12 @@ function addEnemySequence(delayBefore, image, score, lives, speed, number, delay
 
 }
 
+function setUpSequences() {
+    addEnemySequence(2000, 'alienship', 100, 1, 200 / 1000,
+    2, 800, wayPoints['leftToRightShallow']);
+    addEnemySequence(4000, 'alienship', 100, 1, 400 / 1000,
+    6, 400, wayPoints['streamFrom180']);
+}
 
 function tick() {
     let now = Date.now();

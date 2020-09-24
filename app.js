@@ -75,6 +75,8 @@ const wayPoints = {
 ]
 };
 
+let enemySequences = [];
+
 let gameManager = {
     assets:{},
     player: undefined,

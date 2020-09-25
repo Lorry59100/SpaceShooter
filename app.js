@@ -148,7 +148,7 @@ let gameManager = {
 
     /* SPRITE */
     class EnemyCollection {
-        constructor(player) {
+        constructor(player, bullets) {
             this.listEnemies = [];
             this.lastAdded = 0;
             this.gameOver = false;
@@ -156,6 +156,7 @@ let gameManager = {
             this.sequencesDone = false;
             this.count = 0;
             this.player = player;
+            this.bullets = bullets;
         }
 
         reset() {

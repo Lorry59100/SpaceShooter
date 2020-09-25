@@ -253,6 +253,7 @@ let gameManager = {
 
         setPosition(x, y, shift) {
             this.position.update(x,y);
+            this.containingBox.update(this.position.x, this.position.y);
             if (shift == true) {
                 this.incrementPosition(this.anchorShift.x, this.anchorShift.y);
             }

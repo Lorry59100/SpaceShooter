@@ -571,6 +571,8 @@ function runCountdown() {
         setTimeout(writeMessage, gameSettings.countdownGap * (i + 1),
         gameSettings.countdownValues[i])
     }
+    setTimeout(endCountdown, 
+        (gameSettings.countdownValues.length + 1) * gameSettings.countdownGap);
 }
 
 function writeMessage(text) {

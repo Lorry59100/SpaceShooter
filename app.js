@@ -41,7 +41,16 @@ const gameSettings = {
         ready: 1,
         dead: 0,
         movingToWaypoint: 2
-    }
+    },
+
+    gamePhase: {
+        readyToPlay: 1,
+        countdownToStart: 2,
+        playing: 3,
+        gameOver: 4
+    },
+    countdownGap: 700,
+    countdownValues: ['2, 1, GO!']
     
 };
 

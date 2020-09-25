@@ -185,8 +185,24 @@ let gameManager = {
             for (let i = this.listEnemies.length - 1; i >= 0; --i) {
                 if(this.listEnemies[i].state == gameSettings.enemyState.dead) {
                     this.listEnemies.splice(i, 1);
-                } else {
-                    this.listEnemies[i].update(dt);
+                } else if(this.listEnemies[i].state == gameSettings.enemyState.movingToWaypoint) {
+                    let en = this.listEnemies[i];
+
+                    for(let b = 0; b < this.bullets.listBullets.length; ++b) {
+                        let bu = this.bullets.listBullets[b];
+                        if(bu.dead == false &&
+                            bu.position.y > gameSettings.bulletTop &&
+                            en.containingBox.intersectedBy(bu.containingBox) == true) {
+                                bu.killMe();
+                                en.lives--;
+                                if (en.lives <= 0) {
+                                    this.player.incrementScore(en.score);
+                                    en.killMe();
+                                }
+                            }
+                    }
+
+                    en.update(dt);
                 }
             }
 

@@ -557,6 +557,13 @@ function tick() {
     setTimeout(tick, gameSettings.targetFPS);
 }
 
+function endCountdown() {
+    clearMessages();
+    gameManager.phase = gameSettings.gamePhase.playing;
+    gameManager.lastUpdated = Date.now();
+    setTimeout(tick, gameSettings.targetFPS);
+}
+
 function runCountdown() {
     gameManager.phase = gameSettings.gamePhase.countdownToStart;
     writeMessage(3);

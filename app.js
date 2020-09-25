@@ -158,6 +158,16 @@ let gameManager = {
             this.player = player;
         }
 
+        reset() {
+            this.killAll();
+            this.listEnemies = [];
+            this.lastAdded = 0;
+            this.gameOver = false;
+            this.sequenceIndex = 0;
+            this.sequencesDone = false;
+            this.count = 0;
+        }
+
         killAll() {
             for(let i = 0; i < this.listEnemies.length; i++) {
                 this.listEnemies[i].killMe();

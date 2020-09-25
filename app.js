@@ -557,6 +557,19 @@ function tick() {
     setTimeout(tick, gameSettings.targetFPS);
 }
 
+function writeMessage(text) {
+    clearMessages();
+    appendMessage(text);
+}
+
+function appendMessage(text) {
+    $('#messageContainer').append('<div class="message">' + text + '</div>')
+}
+
+function clearMessages() {
+    $('#messageContainer').empty();
+}
+
 function resetBullets() {
     if(gameManager.bullets != undefined) {
         gameManager.bullets.reset();

@@ -658,31 +658,35 @@ function processAsset(indexNum) {
 
 /* DETECTION DES TOUCHES */
 $(function(){
-    processAsset(0);
     setUpSequences();
-    $(document).keydown(
-
-        function(e){
-
-            switch(e.which) {
-                case gameSettings.keyPress.up :
-                    gameManager.player.move(0, -1);
-                    break
-                case gameSettings.keyPress.down :
-                    gameManager.player.move(0, 1);
-                    break
-                case gameSettings.keyPress.left :
-                    gameManager.player.move(-1, 0);;
-                    break
-                case gameSettings.keyPress.right :
-                    gameManager.player.move(1, 0);
-                    break
-                case gameSettings.keyPress.space :
-                    break
+    $(document).keydown(function(e){
+            if(gameManager.phase == gameSettings.gamePhase.readyToPlay) {
+                if(e.which == gameSettings.keyPress.space) {
+                    runCountdown();
+                }
+            } else if (gameManager.phase == gameSettings.gamePhase.playing) {
+                switch(e.which) {
+                    case gameSettings.keyPress.up :
+                        gameManager.player.move(0, -1);
+                        break
+                    case gameSettings.keyPress.down :
+                        gameManager.player.move(0, 1);
+                        break
+                    case gameSettings.keyPress.left :
+                        gameManager.player.move(-1, 0);;
+                        break
+                    case gameSettings.keyPress.right :
+                        gameManager.player.move(1, 0);
+                        break
+                    case gameSettings.keyPress.space :
+                        break
+                }
+            } else if (gameManager.phase == gameSettings.gameOver) {
+                if(e.which == gameSettings.keyPress.space) {
+                    resetGame();
+                } 
             }
-
         }
-
     );
-
+    processAsset(0);
 });

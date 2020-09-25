@@ -42,7 +42,7 @@ const gameSettings = {
         dead: 0,
         movingToWaypoint: 2
     },
-
+    pressSpaceDelay: 3000,
     gamePhase: {
         readyToPlay: 1,
         countdownToStart: 2,

@@ -554,7 +554,13 @@ function tick() {
     gameManager.bullets.update(dt);
     gameManager.enemies.update(dt);
 
-    setTimeout(tick, gameSettings.targetFPS);
+    if(gameManager.enemies.gameOver == true) {
+        console.log('Game Over');
+        showGameOver();
+    } else {
+        setTimeout(tick, gameSettings.targetFPS);
+    }
+
 }
 
 function showGameOver() {

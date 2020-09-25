@@ -60,13 +60,20 @@ const wayPoints = {
         y : 128,
         dir_x : 0,
         dir_y : 1
+        },
+        {
+        rotation : 0,
+        x : 810,
+        y : 128,
+        dir_x : 1,
+        dir_y : 0
         }
 ],
     streamFrom180 : [
         {
         rotation : 0,
         x : 180,
-        y : 200,
+        y : 700,
         dir_x : 0,
         dir_y : 0
         },

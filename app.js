@@ -621,7 +621,6 @@ function resetGame() {
     resetBullets();
     resetEnemies();
     runCountdown();
-    setTimeout(tick, gameSettings.targetFPS);
 }
 
 function processAsset(indexNum) {

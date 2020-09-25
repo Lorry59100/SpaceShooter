@@ -557,6 +557,13 @@ function tick() {
     setTimeout(tick, gameSettings.targetFPS);
 }
 
+function showGameOver() {
+    gameManager.phase = gameSettings.gameOver;
+    writeMessage('Game Over');
+    setTimeout(function() {appendMessage('Press space to reset'); }, 
+                gameSettings.pressSpaceDelay);
+}
+
 function endCountdown() {
     clearMessages();
     gameManager.phase = gameSettings.gamePhase.playing;

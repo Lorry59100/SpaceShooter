@@ -18,7 +18,8 @@ const gameSettings = {
 
     bulletSpeed : 700 / 1000,
     bulletLife : 4000,
-    bulletFireRate : 2000,
+    bulletFireRate : 200,
+    bulletTop: 10,
 
     playareaWidth: 720,
     playareaHeight: 720,

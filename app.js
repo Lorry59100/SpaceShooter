@@ -197,7 +197,7 @@ let gameManager = {
                                 en.lives--;
                                 if (en.lives <= 0) {
                                     this.player.incrementScore(en.score);
-                                    en.killMe();
+                                    en.killMe()
                                 }
                             }
                     }

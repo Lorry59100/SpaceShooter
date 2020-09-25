@@ -224,6 +224,8 @@ let gameManager = {
             this.imgName = imgName;
             this.size = sizePx;
             this.anchorShift = new Point(-this.size.width / 2 , -this.size.height / 2);
+            this.containingBox = new Rect(this.position.x, this.position.y,
+                    this.size.width, this.size.height);
         }
 
         addToBoard(shift) {

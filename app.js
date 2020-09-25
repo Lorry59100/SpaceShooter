@@ -279,7 +279,7 @@ let gameManager = {
         }
 
         setPosition(x, y, shift) {
-            this.position.update(x,y);
+            this.position.update(x, y);
             this.containingBox.update(this.position.x, this.position.y);
             if (shift == true) {
                 this.incrementPosition(this.anchorShift.x, this.anchorShift.y);
@@ -289,11 +289,13 @@ let gameManager = {
 
         updatePosition(x, y) {
             this.position.update(x,y);
+            this.containingBox.update(this.position.x, this.position.y);
             this.draw();
         }
 
         incrementPosition(ix, iy) {
             this.position.increment(ix,iy);
+            this.containingBox.update(this.position.x, this.position.y);
             this.draw();
         }
 

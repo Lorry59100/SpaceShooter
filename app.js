@@ -50,7 +50,7 @@ const gameSettings = {
         gameOver: 4
     },
     countdownGap: 700,
-    countdownValues: ['2, 1, GO!']
+    countdownValues: ['2', '1', 'GO!']
     
 };
 
@@ -557,6 +557,15 @@ function tick() {
     setTimeout(tick, gameSettings.targetFPS);
 }
 
+function runCountdown() {
+    gameManager.phase = gameSettings.gamePhase.countdownToStart;
+    writeMessage(3);
+    for (let i = 0; i < gameSettings.countdownValues.length; i++) {
+        setTimeout(writeMessage, gameSettings.countdownGap * (i + 1),
+        gameSettings.countdownValues[i])
+    }
+}
+
 function writeMessage(text) {
     clearMessages();
     appendMessage(text);
@@ -602,6 +611,7 @@ function resetGame() {
     resetPlayer();
     resetBullets();
     resetEnemies();
+    runCountdown();
     setTimeout(tick, gameSettings.targetFPS);
 }
 

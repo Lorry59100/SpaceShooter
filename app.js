@@ -487,6 +487,7 @@ let gameManager = {
                 this.lives = gameSettings.playerstartLives;
                 this.score = 0;
                 this.highScore = 0;
+                this.hit = false;
                 this.state = gameSettings.playerState.ok;
                 this.boundaryRect = boundaryRect;
                 this.boundaryRect.shift(this.anchorShift.x, this.anchorShift.y);
@@ -495,6 +496,7 @@ let gameManager = {
         reset() {
             this.state = gameSettings.playerState.ok;
             this.score = 0;
+            this.hit = false;
             this.lives = gameSettings.playerstartLives;
             this.setLives();
             this.setScore();

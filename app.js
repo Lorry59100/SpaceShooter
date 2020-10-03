@@ -6,6 +6,49 @@ const imageFiles = [
 ];
 
 /* CONTROLES ET POSITION DE DEPART */
+
+const wayPoints = {
+    leftToRightShallow : [{
+        rotation : 0,
+        x : 60,
+        y : -90,
+        dir_x : 0,
+        dir_y : 0
+    },
+    {
+        rotation : 0,
+        x : 60,
+        y : 128,
+        dir_x : 0,
+        dir_y : 1
+    },
+    {
+        rotation : 0,
+        x : 810,
+        y : 128,
+        dir_x : 1,
+        dir_y : 0
+    }
+    ],
+    streamFrom180 : [{
+        rotation : 0,
+        x : 180,
+        y : 620,
+        dir_x : 0,
+        dir_y : 0
+    },
+    {
+        rotation : 0,
+        x : 180,
+        y : -90,
+        dir_x : 0,
+        dir_y : -1
+    }
+    ]
+};
+
+let enemySequences = [];
+
 const gameSettings = {
     keyPress : {
         left : 37,
@@ -22,7 +65,7 @@ const gameSettings = {
     bulletTop: 10,
 
     playareaWidth: 720,
-    playareaHeight: 720,
+    playareaHeight: 576,
     playareaDiv: '#playarea',
 
     playerDivName : 'playersprite',
@@ -30,12 +73,11 @@ const gameSettings = {
         x :360,
         y :440,
     },
-
     playerstartLives : 3,
     playerState: {
         ok: 0,
         dead: 1,
-        hitFlashing: 3
+        hitFlashing: 2
     },
     playerMoveStep : 8,
     enemyState: {
@@ -55,50 +97,6 @@ const gameSettings = {
     
 };
 
-const wayPoints = {
-    leftToRightShallow : [
-        {
-        rotation : 0,
-        x : 60,
-        y : -90,
-        dir_x : 0,
-        dir_y : 0
-        },
-        {
-        rotation : 0,
-        x : 60,
-        y : 128,
-        dir_x : 0,
-        dir_y : 1
-        },
-        {
-        rotation : 0,
-        x : 810,
-        y : 128,
-        dir_x : 1,
-        dir_y : 0
-        }
-],
-    streamFrom180 : [
-        {
-        rotation : 0,
-        x : 180,
-        y : 700,
-        dir_x : 0,
-        dir_y : 0
-        },
-        {
-        rotation : 0,
-        x : 180,
-        y : -90,
-        dir_x : 0,
-        dir_y : -1
-        }
-]
-};
-
-let enemySequences = [];
-
 let gameManager = {
     assets:{},
     player: undefined,
@@ -106,12 +104,13 @@ let gameManager = {
     phase: gameSettings.gamePhase.gameOver,
     lastUpdated: Date.now(),
     elapsedTime: 0,
-    fps: 0,
+    fps: 0
 }
 
-/***  CLASSES SIZE POINT & SPRITE ***/
+/*** CLASSES ***/
 
     /* SIZE */
+    
     class Size {
         constructor(w, h) {
             this.width = w;
@@ -120,6 +119,7 @@ let gameManager = {
     }
 
     /* POINT */
+    
     class Point {
         constructor(x, y) {
             this.x = x;
@@ -144,9 +144,8 @@ let gameManager = {
         }
     }
 
-    
+    /* ENNEMYCOLLECTION */
 
-    /* SPRITE */
     class EnemyCollection {
         constructor(player, bullets) {
             this.listEnemies = [];
@@ -170,44 +169,43 @@ let gameManager = {
         }
 
         killAll() {
-            for(let i = 0; i < this.listEnemies.length; i++) {
+            for(let i = 0; i < this.listEnemies.length; ++i) {
                 this.listEnemies[i].killMe();
             }
         }
 
         update(dt) {
             this.lastAdded += dt;
-            if (this.sequencesDone == false &&
+            if (this.sequencesDone == false && 
                 enemySequences[this.sequenceIndex].delayBefore < this.lastAdded) {
-                    this.addEnemy();
-                }
-
+                this.addEnemy();
+            }
+    
             for (let i = this.listEnemies.length - 1; i >= 0; --i) {
-                if(this.listEnemies[i].state == gameSettings.enemyState.dead) {
+                if (this.listEnemies[i].state == gameSettings.enemyState.dead) {
                     this.listEnemies.splice(i, 1);
-                } else if(this.listEnemies[i].state == gameSettings.enemyState.movingToWaypoint) {
+                } else if (this.listEnemies[i].state == gameSettings.enemyState.movingToWaypoint){
                     let en = this.listEnemies[i];
-
-                    for(let b = 0; b < this.bullets.listBullets.length; ++b) {
+    
+                    for (let b = 0; b < this.bullets.listBullets.length; ++b) {
                         let bu = this.bullets.listBullets[b];
-                        if(bu.dead == false &&
+                        if (bu.dead == false &&
                             bu.position.y > gameSettings.bulletTop &&
-                            en.containingBox.intersectedBy(bu.containingBox) == true) {
+                            en.containingBox.IntersectedBy(bu.containingBox) == true) {
                                 bu.killMe();
                                 en.lives--;
                                 if (en.lives <= 0) {
                                     this.player.incrementScore(en.score);
-                                    en.killMe()
+                                    en.killMe();
                                 }
-                            }
+                        }
                     }
-
+    
                     en.update(dt);
                 }
             }
-
-                this.checkGameOver();
-
+    
+            this.checkGameOver();
         }
 
         checkGameOver() {
@@ -218,6 +216,7 @@ let gameManager = {
         }
 
         addEnemy() {
+            /* Ajoute un nouvel ennemi avec la sequence data */
             let seq = enemySequences[this.sequenceIndex];
             let en_new = new Enemy('en_' + this.count, gameManager.assets[seq.image],
             this.player, seq);
@@ -231,18 +230,19 @@ let gameManager = {
                 console.log('sequences done');
             }
         }
-
     }
     
-    
+    /* WAYPOINT */
+
     class WayPoint {
         constructor(x,y,dir_x,dir_y) {
-            this.point = new Point(x,y);
+            this.point = new Point(x, y);
             this.dir_x = dir_x;
             this.dir_y = dir_y;
         }
     }
     
+    /* SPRITE */
     
     class Sprite {
         constructor(divName, position, imgName, sizePx) {
@@ -250,13 +250,13 @@ let gameManager = {
             this.divName = divName;
             this.imgName = imgName;
             this.size = sizePx;
-            this.anchorShift = new Point(-this.size.width / 2 , -this.size.height / 2);
+            this.anchorShift = new Point(-this.size.width / 2, -this.size.height / 2);
             this.containingBox = new Rect(this.position.x, this.position.y,
                     this.size.width, this.size.height);
         }
 
         addToBoard(shift) {
-            var div = document.createElement("div");
+            let div = document.createElement("div");
             div.classList.add("sprite");
             div.id = this.divName;
             div.style.backgroundImage = "url('" + this.imgName + "')";
@@ -265,6 +265,7 @@ let gameManager = {
             $(gameSettings.playareaDiv).append(div);
 
             this.setPosition(this.position.x, this.position.y, shift);
+
         }
 
         removeFromBoard() {
@@ -301,6 +302,7 @@ let gameManager = {
 
     }
 
+    /* RECT */
 
     class Rect {
         constructor(x, y, width, height) {
@@ -336,7 +338,7 @@ let gameManager = {
             }
         }
 
-        intersectedBy(rect) {
+        IntersectedBy(rect) {
             if(this.origin.x > rect.max.x || rect.origin.x > this.max.x) {
                 return false; 
             }
@@ -347,6 +349,8 @@ let gameManager = {
         }
 
     }
+
+    /* BULLETCOLLECTION */
 
     class BulletCollection {
         constructor(player) {
@@ -366,7 +370,7 @@ let gameManager = {
         }
 
         update(dt) {
-            for(let i = this.listBullets.length - 1; i >=0 ; --i) {
+            for(let i = this.listBullets.length - 1; i >= 0 ; --i) {
                 if(this.listBullets[i].dead == true ) {
                     this.listBullets.splice(i, 1);
                 } else {
@@ -389,10 +393,13 @@ let gameManager = {
                     this.total_bullets++;
                 }
         }
-
     }
 
-    /* EXTENSIONS DE CLASSE */
+    
+    /*** EXTENSIONS DE CLASSE ***/
+
+    /* ENEMY */
+
     class Enemy extends Sprite {
         constructor(divName, assetDesc, player, sequence) {
             super(divName, new Point(0,0), assetDesc.fileName, new Size(assetDesc.width, assetDesc.height));
@@ -405,12 +412,12 @@ let gameManager = {
             this.score = sequence.score;
             this.lives = sequence.lives;
             this.speed = sequence.speed;
-            this.readInWayPoints(sequence.wayPoints);
+            this.readInWayPoints(sequence.waypoints);
         }
 
         readInWayPoints(wpList) {
             this.waypointList = [];
-            for(let i = 0; i < wpList.length; i++) {
+            for(let i = 0; i < wpList.length; ++i) {
                 let t_wp = wpList[i];
                 let n_wp = new WayPoint(
                     t_wp.x + this.anchorShift.x,
@@ -424,7 +431,7 @@ let gameManager = {
 
         update(dt) {
             switch(this.state) {
-                case gameSettings.enemyState.movingToWayPoint:
+                case gameSettings.enemyState.movingToWaypoint:
                     this.moveTowardPoint(dt);
                     break;
             }
@@ -467,11 +474,11 @@ let gameManager = {
             this.addToBoard(false);
             this.targetWayPointNumber = 1;
             this.targetWayPoint = this.waypointList[this.targetWayPointNumber];
-            this.state = gameSettings.enemyState.movingToWayPoint;
+            this.state = gameSettings.enemyState.movingToWaypoint;
         }
-
     }
 
+    /* PLAYER */
 
     class Player extends Sprite {
         constructor(divName, position, assetDesc, boundaryRect) {
@@ -483,7 +490,6 @@ let gameManager = {
                 this.state = gameSettings.playerState.ok;
                 this.boundaryRect = boundaryRect;
                 this.boundaryRect.shift(this.anchorShift.x, this.anchorShift.y);
-                /* console.log(assetDesc) */
         }
 
         reset() {
@@ -503,8 +509,7 @@ let gameManager = {
             if(this.boundaryRect.outsideHorizontal(xStep + this.position.x) == true) {
                 xStep = 0;
             }
-
-            if(this.boundaryRect.outsideHorizontal(yStep + this.position.y) == true) {
+            if(this.boundaryRect.outsideVertical(yStep + this.position.y) == true) {
                 yStep = 0;
             }
 
@@ -520,11 +525,9 @@ let gameManager = {
         setLives() {
             $('#lives').text('x ' + this.lives);
         }
-
         setScore() {
             $('#score').text(this.score);
         }
-
         setHighScore() {
             if(this.score > this.highScore) {
                 this.highScore = this.score;
@@ -534,9 +537,10 @@ let gameManager = {
 
     }
 
-    class Bullet extends Sprite {
+    /* BULLET */
 
-       constructor(divName, assetDesc, position) {
+    class Bullet extends Sprite {
+        constructor(divName, assetDesc, position) {
         super(divName, position, assetDesc.fileName, new Size(assetDesc.width, assetDesc.height));
         this.life = gameSettings.bulletLife;
         this.dead = false;
@@ -556,28 +560,27 @@ let gameManager = {
             this.dead = true;
             this.removeFromBoard();
         }
-
     }
 
-/* FONCTIONS */
-function addEnemySequence(delayBefore, image, score, lives, speed, number, delayBetween, wayPoints) {
 
-    for(let i = 0; i < number; i++) {
+    /***  FONCTIONS ***/
+
+function addEnemySequence(delayBefore, image, score, 
+    lives, speed, number, delayBetween, waypoints) {
+        for(let i = 0; i < number; ++i) {
         let delay = delayBetween;
         if(i == 0) {
             delay = delayBefore;
         }
-
         enemySequences.push({
             delayBefore : delay,
             image : image,
-            wayPoints : wayPoints,
+            waypoints : waypoints,
             score : score,
             lives :lives,
             speed : speed
         });
     }
-
 }
 
 function setUpSequences() {
@@ -624,7 +627,7 @@ function endCountdown() {
 function runCountdown() {
     gameManager.phase = gameSettings.gamePhase.countdownToStart;
     writeMessage(3);
-    for (let i = 0; i < gameSettings.countdownValues.length; i++) {
+    for (let i = 0; i < gameSettings.countdownValues.length; ++i) {
         setTimeout(writeMessage, gameSettings.countdownGap * (i + 1),
         gameSettings.countdownValues[i])
     }
@@ -662,15 +665,18 @@ function resetEnemies() {
 }
 
 function resetPlayer() {
+    console.log('resetplayer()');
+    console.log('resetplayer() gameManager.player:' , gameManager.player);
     if(gameManager.player == undefined) {
+        console.log('resetplayer() making new');
         let asset = gameManager.assets['ship1'];
         
         gameManager.player = new Player(gameSettings.playerDivName,
         new Point(gameSettings.playerStart.x, gameSettings.playerStart.y),
         asset,
-        new Rect(40,40, gameSettings.playareaWidth - 80, gameSettings.playareaHeight - 80)
-        );
+        new Rect(40,40, gameSettings.playareaWidth - 80, gameSettings.playareaHeight - 80));
         gameManager.player.addToBoard(true);
+    console.log('resetplayer() added new gameManager.player:' , gameManager.player);
     }
     console.log('resetPlayer() gameManager.player:', gameManager.player);
     gameManager.player.reset()
@@ -710,7 +716,10 @@ function processAsset(indexNum) {
 }
 
 /* DETECTION DES TOUCHES */
+
 $(function(){
+    console.log('ready..!');
+    console.log("gameSettings:gameSettings", gameSettings);
     setUpSequences();
     $(document).keydown(function(e){
             if(gameManager.phase == gameSettings.gamePhase.readyToPlay) {
@@ -731,15 +740,12 @@ $(function(){
                     case gameSettings.keyPress.right :
                         gameManager.player.move(1, 0);
                         break
-                    case gameSettings.keyPress.space :
-                        break
                 }
             } else if (gameManager.phase == gameSettings.gameOver) {
                 if(e.which == gameSettings.keyPress.space) {
                     resetGame();
                 } 
             }
-        }
-    );
+        });
     processAsset(0);
 });

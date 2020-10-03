@@ -68,6 +68,8 @@ const gameSettings = {
     playareaHeight: 576,
     playareaDiv: '#playarea',
 
+    playerFlashOpacity: '0.5',
+
     playerDivName : 'playersprite',
     playerStart : {
         x :360,

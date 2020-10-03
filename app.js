@@ -648,6 +648,7 @@ function tick() {
         showGameOver();
     } else {
         gameManager.bullets.update(dt);
+        gameManager.player.update(dt);
         setTimeout(tick, gameSettings.targetFPS);
     }
 

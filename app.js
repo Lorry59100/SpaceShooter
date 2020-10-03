@@ -437,6 +437,15 @@ let gameManager = {
             }
         }
 
+        checkPlayerCollision() {
+            if(this.containingBox.IntersectedBy(this.player.containingBox) == true) {
+                if(this.player.hit == false) {
+                    this.player.hit == true;
+                    console.log('Collision avec le joueur');
+                }
+            }
+        }
+
         moveTowardPoint(dt) {
             let inc = dt * this.speed;
             this.incrementPosition(inc * this.targetWayPoint.dir_x, inc * this.targetWayPoint.dir_y);

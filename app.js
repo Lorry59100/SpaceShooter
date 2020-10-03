@@ -518,6 +518,33 @@ let gameManager = {
             this.setPosition(gameSettings.playerStart.x, gameSettings.playerStart.y, true);
         }
 
+        update(dt) {
+            
+            switch(this.state) {
+                case gameSettings.playerState.hitFlashing:
+                    this.lasthit += dt;
+                    if (this.lasthit > 2000) {
+                        console.log('player back !!');
+                        this.lasthit = 0;
+                        this.state = gameSettings.playerState.ok;
+                        this.hit = false;
+                        $('#' + this.divName).css({'opacity' : '1.0'});
+                    }
+                break;
+            }
+            
+            if (this.hit == true && this.state != gameSettings.playerState.hitFlashing) {
+                this.state = gameSettings.playerState.hitFlashing;
+                this.lasthit = 0;
+                this.lives--;
+                this.setLives();
+                console.log('player hit !!');
+                if(this.lives > 0) {
+                    $('#' + this.divName).css({'opacity' : gameSettings.playerFlashOpacity});
+                }
+            }
+        }
+
         move(x, y) {
             let xStep = gameSettings.playerMoveStep * x;
             let yStep = gameSettings.playerMoveStep * y;

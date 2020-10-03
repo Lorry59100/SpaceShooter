@@ -61,7 +61,7 @@ const gameSettings = {
 
     bulletSpeed : 700 / 1000,
     bulletLife : 4000,
-    bulletFireRate : 200,
+    bulletFireRate : 200000,
     bulletTop: 10,
 
     playareaWidth: 720,
@@ -443,7 +443,7 @@ let gameManager = {
         checkPlayerCollision() {
             if(this.containingBox.IntersectedBy(this.player.containingBox) == true) {
                 if(this.player.hit == false) {
-                    this.player.hit == true;
+                    this.player.hit = true;
                     console.log('Collision avec le joueur');
                 }
             }

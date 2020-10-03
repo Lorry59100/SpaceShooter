@@ -433,6 +433,7 @@ let gameManager = {
             switch(this.state) {
                 case gameSettings.enemyState.movingToWaypoint:
                     this.moveTowardPoint(dt);
+                    this.checkPlayerCollision();
                     break;
             }
         }

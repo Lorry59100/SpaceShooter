@@ -649,7 +649,12 @@ function tick() {
     } else {
         gameManager.bullets.update(dt);
         gameManager.player.update(dt);
-        setTimeout(tick, gameSettings.targetFPS);
+        if(gameManager.player.lives <= 0) {
+        console.log('Game Over');
+        showGameOver();  
+        } else if (gameManager.phase == gameSettings.gamePhase.playing) {
+            setTimeout(tick, gameSettings.targetFPS);
+        }
     }
 
 }

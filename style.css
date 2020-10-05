@@ -74,3 +74,13 @@ body {
     width: 5px;
     height: 5px;
 }
+
+@keyframes starY {
+    from {
+        transform: translateY(-30px);
+    }
+
+    to {
+        transform: translateY(600px);
+    }
+}

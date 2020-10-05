@@ -713,6 +713,8 @@ function clearTimeouts() {
 
 function showGameOver() {
     gameManager.phase = gameSettings.gameOver;
+    pauseStars();
+    clearTimeouts();
     writeMessage('Game Over');
     setTimeout(function() {appendMessage('Press space to reset'); }, 
                 gameSettings.pressSpaceDelay);

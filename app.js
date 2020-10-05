@@ -537,7 +537,8 @@ let gameManager = {
             
             if (this.hit == true && this.state != gameSettings.playerState.hitFlashing) {
                 this.state = gameSettings.playerState.hitFlashing;
-                
+                this.lastFlash = 0;
+                this.numFlashes = 0;
                 this.lives--;
                 this.setLives();
                 console.log('player hit !!');

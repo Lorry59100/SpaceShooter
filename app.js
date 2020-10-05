@@ -500,6 +500,8 @@ let gameManager = {
                 this.score = 0;
                 this.highScore = 0;
                 this.hit = false;
+                this.lastFlash = 0;
+                this.numFlashes = 0;
                 this.state = gameSettings.playerState.ok;
                 this.boundaryRect = boundaryRect;
                 this.boundaryRect.shift(this.anchorShift.x, this.anchorShift.y);
@@ -509,6 +511,8 @@ let gameManager = {
             this.state = gameSettings.playerState.ok;
             this.score = 0;
             this.hit = false;
+            this.lastFlash = 0;
+            this.numFlashes = 0;
             this.lives = gameSettings.playerstartLives;
             this.setLives();
             this.setScore();

@@ -64,18 +64,21 @@ body {
     width: 3px;
     height: 3px;
     background-color: gray;
+    animation-duration: 5s;
 }
 
 .starMedium {
     left: 400px;
     width: 4px;
     height: 4px;
+    animation-duration: 4s;
 }
 
 .starBig {
     left: 100px;
     width: 5px;
     height: 5px;
+    animation-duration: 3s;
 }
 
 @keyframes starY {

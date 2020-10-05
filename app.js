@@ -527,12 +527,21 @@ let gameManager = {
             switch(this.state) {
                 case gameSettings.playerState.hitFlashing:
                     this.lastFlash += dt;
-                    if (this.lasthit > 2000) {
-                        console.log('player back !!');
-                        this.lasthit = 0;
-                        this.state = gameSettings.playerState.ok;
-                        this.hit = false;
-                        $('#' + this.divName).css({'opacity' : '1.0'});
+                    if (this.lastFlash > gameSettings.playerFlashTime) {
+                        this.lastFlash = 0;
+                        this.numFlashes++;
+                        if(this.numFlashes == gameSettings.playerFlashes) {
+                            this.state = gameSettings.playerState.ok;
+                            $('#' + this.divName).show();
+                            this.hit = false;
+                            $('#' + this.divName).css({'opacity' : '1.0'});
+                        } else {
+                            if (this.numFlashes % 2 == 1) {
+                                $('#' + this.divName).hide();
+                            } else {
+                                $('#' + this.divName).show();
+                            }
+                        }
                     }
                 break;
             }

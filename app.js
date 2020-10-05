@@ -785,6 +785,7 @@ function resetPlayer() {
 
 function resetGame() {
     console.log('Main Game init()');
+    clearTimeouts();
     resetPlayer();
     resetBullets();
     resetEnemies();

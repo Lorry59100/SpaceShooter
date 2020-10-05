@@ -704,6 +704,13 @@ function tick() {
 
 }
 
+function clearTimeouts() {
+    for(let i = 0; i < gameManager.timeouts.length; ++i) {
+        clearTimeout(gameManager.timeouts[i]);
+    }
+    gameManager.timeouts = [];
+}
+
 function showGameOver() {
     gameManager.phase = gameSettings.gameOver;
     writeMessage('Game Over');

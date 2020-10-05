@@ -69,6 +69,8 @@ const gameSettings = {
     playareaDiv: '#playarea',
 
     playerFlashOpacity: '0.5',
+    playerFlashTime : 300,
+    playerFlashes : 8,
 
     playerDivName : 'playersprite',
     playerStart : {
@@ -524,7 +526,7 @@ let gameManager = {
             
             switch(this.state) {
                 case gameSettings.playerState.hitFlashing:
-                    this.lasthit += dt;
+                    this.lastFlash += dt;
                     if (this.lasthit > 2000) {
                         console.log('player back !!');
                         this.lasthit = 0;

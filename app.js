@@ -728,6 +728,7 @@ function endCountdown() {
 }
 
 function runCountdown() {
+    createStars();
     gameManager.phase = gameSettings.gamePhase.countdownToStart;
     writeMessage(3);
     for (let i = 0; i < gameSettings.countdownValues.length; ++i) {

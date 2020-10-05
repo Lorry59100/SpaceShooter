@@ -54,6 +54,9 @@ body {
     top: 0px;
     background-color: white;
     border-radius: 50%;
+    animation-name: starY;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 .starSmall {

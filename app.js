@@ -510,7 +510,6 @@ let gameManager = {
             this.state = gameSettings.playerState.ok;
             this.score = 0;
             this.hit = false;
-            this.lasthit = 0;
             this.lives = gameSettings.playerstartLives;
             this.setLives();
             this.setScore();

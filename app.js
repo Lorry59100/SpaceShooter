@@ -623,6 +623,36 @@ let gameManager = {
 
     /***  FONCTIONS ***/
 
+function getRandInt(from, range) {
+    return Math.floor(Math.random() * range) + from;
+}
+
+function removeStars() {
+    $('.star').remove();
+}
+
+function pauseStars() {
+    $('.star').css({
+        "animation-play-state" : "paused"
+    });
+}
+
+function addStar(starClass) {
+    let div = document.createElement("div");
+    div.classList.add("star", starClass);
+    div.style.left = getRandInt(0, 720) + "px";
+    $(gameSettings.playareaDiv).append(div);
+}
+
+function createStars() {
+    for(let i = 0; i < 10; ++i) {
+        let delay = i * 333;
+        gameManager.timeouts.push(window.setTimeout(addStar, delay, "starSmall"));
+        gameManager.timeouts.push(window.setTimeout(addStar, delay + 333, "starMedium"));
+        gameManager.timeouts.push(window.setTimeout(addStar, delay + 666, "starBig"));
+    }
+}
+
 function addEnemySequence(delayBefore, image, score, 
     lives, speed, number, delayBetween, waypoints) {
         for(let i = 0; i < number; ++i) {

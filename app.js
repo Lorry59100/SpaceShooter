@@ -500,7 +500,6 @@ let gameManager = {
                 this.score = 0;
                 this.highScore = 0;
                 this.hit = false;
-                this.lasthit = 0;
                 this.state = gameSettings.playerState.ok;
                 this.boundaryRect = boundaryRect;
                 this.boundaryRect.shift(this.anchorShift.x, this.anchorShift.y);
